@@ -4,6 +4,7 @@ const daysCondition = require('./data/conditionDays');
 async function getStatistic() {
     let numberUsers = await DButils.getNumberUsers({});
     console.log(numberUsers);
+    console.log("Этап 1");
     // let messages = await DButils.findMessages({});
     let aggregateOptions = [
         {
@@ -38,7 +39,7 @@ async function getStatistic() {
     // console.log(countMessageByDateUser);
     let days = {};
     let obj = {};
-
+    console.log("Этап 2");
     let numberMessages = await DButils.getNumberMessages({});
 
     obj.info = {
@@ -73,7 +74,7 @@ async function getStatistic() {
     }
 
     // console.log(users.length);
-
+    console.log("Этап 3");
     for (let key in days) {
         days[key].numberUsers = await DButils.getNumberUsers({day: key})
         if (daysCondition[key]) {
@@ -85,6 +86,7 @@ async function getStatistic() {
                     days[key].enterInDay = obj.info.numberUsers
                 }
             }
+            console.log("Этап 4");
             if (day.afterTest) {
                 let numberMessagesUser = await DButils.getNumberMessagesWithDisticnt({text: new RegExp(day.afterTest)});
                 days[key].numberAfterTestQuestion = numberMessagesUser;
@@ -99,6 +101,7 @@ async function getStatistic() {
                 days[key].numberUserAfterSovet = numberMessagesUser;
                 days[key].numberUserBeforeSovet = Math.round((days[key].numberUserAfterPhoto + numberMessagesUser) / 2);
             }
+            console.log("Этап 5");
             if (day.theEnd) {
                 let numberMessagesUser = await DButils.getNumberMessagesWithDisticnt({text: new RegExp(day.theEnd)});
                 days[key].numberUserGoToEnd = numberMessagesUser;
@@ -106,6 +109,7 @@ async function getStatistic() {
         }
     }
     obj.days = days;
+    console.log("Этап 6");
 
     return obj;
 }
