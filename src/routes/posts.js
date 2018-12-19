@@ -7,16 +7,15 @@ class Routes {
     }
 
     setup() {
-        this.app.post("/get-statistic3", async (req, res) => {
-            let data = await statistic.getStatistic(3);
+        this.app.post("/get-statistic", async (req, res) => {
+            let data = await statistic.getStatistic();
             res.send(data);
         });
-        this.app.post("/get-statistic4", async (req, res) => {
-            let data = await statistic.getStatistic(4);
-            res.send(data);
-        });
-
+        setInterval(async () => {
+            await statistic.updateStatistic()
+        }, 15 * 60 * 1000)
     }
 }
+
 
 module.exports = Routes;

@@ -3,6 +3,7 @@ const userModel = mongooseModels.article_model_user;
 const PostsModel = mongooseModels.article_model_post;
 const MessagesModel = mongooseModels.article_model_message;
 const CountMessageModel = mongooseModels.article_model_count_message;
+const StatisticModel = mongooseModels.article_model_statistic;
 
 module.exports = {
 
@@ -73,5 +74,15 @@ module.exports = {
     },
     async updateCountMessage(id, data) {
         return await CountMessageModel.findOneAndUpdate({id: id}, data)
+    },
+    async findStatistic() {
+        return await StatisticModel.findOne({"id": 1});
+    },
+    async newStatistic(data) {
+        let stats = new StatisticModel(data);
+        return await stats.save();
+    },
+    async updateStatistic(data) {
+        return await StatisticModel.findOneAndUpdate({id: 1}, data)
     },
 };

@@ -38,7 +38,13 @@ const countMessage = {
     info: String
 };
 
+const statisticShema = {
+    id: Number,
+    info: Object
+}
+
 const vk_bot = mongoose.createConnection(`mongodb://${cfg.user}:${cfg.pass}@81.90.180.52:27017/zenerit_vk?authSource=admin&w=1`, {useNewUrlParser: true});
+const statistic = mongoose.createConnection(`mongodb://${cfg.user}:${cfg.pass}@81.90.180.52:27017/zenerit_statistic?authSource=admin&w=1`, {useNewUrlParser: true});
 // const vk_bot = mongoose.createConnection(`mongodb://localhost/zenerit_vk?authSource=admin&w=1`, {useNewUrlParser: true});
 
 const schema_user_bot = new mongoose.Schema(schemaUser);
@@ -46,14 +52,19 @@ const schema_user_post = new mongoose.Schema(schemaPost);
 const schema_user_message = new mongoose.Schema(schemaMessage);
 const schema_count_message = new mongoose.Schema(countMessage);
 
+const schema_statistic = new mongoose.Schema(statisticShema);
+
 const article_model_user = vk_bot.model('User', schema_user_bot);
 const article_model_post = vk_bot.model('posts', schema_user_post);
 const article_model_message = vk_bot.model('messages', schema_user_message);
 const article_model_count_message = vk_bot.model('number_messages', schema_count_message);
 
+const article_model_statistic = statistic.model('number_messages', schema_statistic);
+
 module.exports = {
     article_model_user,
     article_model_post,
     article_model_message,
-    article_model_count_message
+    article_model_count_message,
+    article_model_statistic
 };
