@@ -1,7 +1,7 @@
 const DButils = require('./lib/DButils');
 const daysCondition = require('./data/conditionDays');
 
-async function getStatistic() {
+async function getStatistic(numberDays) {
     let numberUsers = await DButils.getNumberUsers({});
     console.log(numberUsers);
     console.log("Этап 1");
@@ -60,16 +60,33 @@ async function getStatistic() {
     //     }
     // });
 
-    for (let i = 0; i < 7; i++) {
-        days[`day${i + 1}`] = {
-            enterInDay: 0,
-            numberAfterTestQuestion: 0,
-            numberUserBeforePhoto: 0,
-            numberUserAfterPhoto: 0,
-            numberUserBeforeSovet: 0,
-            numberUserAfterSovet: 0,
-            numberUserGoToEnd: 0,
-            numberUsers: 0
+    if (numberDays === 3) {
+
+        for (let i = 0; i < 3; i++) {
+            days[`day${i + 1}`] = {
+                enterInDay: 0,
+                numberAfterTestQuestion: 0,
+                numberUserBeforePhoto: 0,
+                numberUserAfterPhoto: 0,
+                numberUserBeforeSovet: 0,
+                numberUserAfterSovet: 0,
+                numberUserGoToEnd: 0,
+                numberUsers: 0
+            }
+        }
+
+    } else if(numberDays === 4){
+        for (let i = 3; i < 7; i++) {
+            days[`day${i + 1}`] = {
+                enterInDay: 0,
+                numberAfterTestQuestion: 0,
+                numberUserBeforePhoto: 0,
+                numberUserAfterPhoto: 0,
+                numberUserBeforeSovet: 0,
+                numberUserAfterSovet: 0,
+                numberUserGoToEnd: 0,
+                numberUsers: 0
+            }
         }
     }
 
