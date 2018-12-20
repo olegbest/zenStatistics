@@ -13,7 +13,7 @@ class Routes {
         });
         setInterval(async () => {
             await statistic.updateStatistic()
-        }, 5 * 60 * 1000)
+        }, 4 * 60 * 60 * 1000)
     }
 }
 
