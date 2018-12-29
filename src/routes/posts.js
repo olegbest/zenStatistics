@@ -11,9 +11,9 @@ class Routes {
             let data = await statistic.getStatistic();
             res.send(data);
         });
-        setInterval(async () => {
-            await statistic.updateStatistic()
-        }, 8 * 60 * 60 * 1000)
+        // setInterval(async () => {
+        //     await statistic.updateStatistic()
+        // }, 8 * 60 * 60 * 1000)
     }
 }
 
